@@ -1,0 +1,28 @@
+{
+  "name": "chat-bot-3.14doorass",
+  "version": "1.0.0",
+  "description": "chat-bot v.1",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run dev --prefix client\" \"npm run server\"",
+    "server": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZubeckY/chat-bot-3.14doorAss.git"
+  },
+  "author": "zubecky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZubeckY/chat-bot-3.14doorAss/issues"
+  },
+  "homepage": "https://github.com/ZubeckY/chat-bot-3.14doorAss#readme",
+  "dependencies": {
+    "concurrently": "^7.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.1",
+    "morgan": "^1.10.0"
+  }
+}
