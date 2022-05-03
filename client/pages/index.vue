@@ -9,8 +9,19 @@
         {{ botAnswer || 'Ответ от бота' }}
       </v-card>
       <!--      Запрос к боту -->
-      <v-form>
-
+      <v-form @submit.prevent style="margin: 20px;">
+        <v-row>
+          <v-col>
+            <v-text-field
+                solo
+                v-model="botQuest"
+                placeholder="Задать вопрос"
+            ></v-text-field>
+          </v-col>
+          <v-col class="col-auto">
+            <v-btn @click="requestAnswer" large>Отправить</v-btn>
+          </v-col>
+        </v-row>
       </v-form>
     </section>
     <!--      Вспомотагельные кнопаки -->
@@ -43,7 +54,19 @@ export default class IndexPage extends Vue {
   private botAnswer:string = ''
   private botQuest:string = ''
   async requestAnswer () {
-
+    let val = this.botQuest.toLowerCase()
+    if (val != '') {
+      try {
+        const response = await this.$axios.get(`http://localhost:3030/quest/${val}`);
+        this.botAnswer = response.data[0].answer
+      } catch (error) {
+        this.botAnswer = 'Леее, такого нема вопроса'
+      } finally {
+        this.botQuest = '';
+      }
+    } else {
+      alert ('Пустой запрос не обрабатывается)))')
+    }
   }
   async controller ($event:any) {
     let val = ($event.target.value);
@@ -65,7 +88,7 @@ export default class IndexPage extends Vue {
   font-family: "Roboto";
 }
 .wrapper {
-  max-width: 500px; margin: 0 auto;
+  max-width: 500px; margin: 40px auto; padding: 20px 0 0;
 }
 .header-title {
   text-align: center;
